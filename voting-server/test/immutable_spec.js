@@ -1,20 +1,26 @@
 import {expect} from 'chai';
-import {List, Map} from 'immutable';
+import {List, Map} from 'Immutable';
 
 describe('immutability', () => {
 
-  describe("a map", () => {
+  describe('a tree', () => {
 
     function addMovie(state, movie) {
-      return state.update('movies', movies => movies.push(movie));
+      return state.update(
+        'movies',
+        movies => movies.push(movie)
+      );
     };
 
     it('is immutable', () => {
-      let state = Map({
-        movies: List.of('movie1', 'movie2')
+      const state = Map({
+        movies: List.of(
+          'movie1',
+          'movie2'
+        )
       });
 
-      let nextState = addMovie(state, 'movie3');
+      const nextState = addMovie(state, 'movie3');
 
       expect(state).to.equal(Map({
         movies: List.of('movie1', 'movie2')
