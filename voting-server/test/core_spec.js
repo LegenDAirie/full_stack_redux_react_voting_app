@@ -86,6 +86,24 @@ describe('application logic', () => {
       }));
     });
 
+    it('marks winner when just one entry left', () => {
+      const state = Map({
+        vote: Map({
+          pair: List.of('movie1', 'movie2'),
+          tally: Map({
+            'movie1': 4,
+            'movie2': 2
+          })
+        }),
+        entries: List()
+      });
+
+      const nextState = next(state);
+      expect(nextState).to.equal(Map({
+        winner: 'movie1'
+      }));
+    });
+
 
   });
 
