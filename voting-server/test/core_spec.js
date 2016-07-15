@@ -42,6 +42,51 @@ describe('application logic', () => {
         entries: List.of('movie3')
       }));
     });
+
+    it('puts winner of current vote back to entries', () => {
+      const state = Map({
+        vote: Map({
+          pair: List.of('movie1', 'movie2'),
+          tally: Map({
+            'movie1': 4,
+            'movie2': 2
+          })
+        }),
+        entries: List.of('movie3', 'movie4', 'movie5')
+      });
+
+      const nextState = next(state);
+      expect(nextState).to.equal(Map({
+        vote: Map({
+          pair: List.of('movie3', 'movie4')
+        }),
+        entries: List.of('movie5', 'movie1')
+      }));
+    });
+
+    it('puts both from tied vote back to entries', () => {
+      const state = Map({
+        vote: Map({
+          pair: List.of('movie1', 'movie2'),
+          tally: Map({
+            'movie3': 3,
+            'movie4': 3
+          })
+        }),
+        entries: List.of('movie3', 'movie4', 'movie5')
+      });
+
+      const nextState = next(state);
+
+      expect(nextState).to.equal(Map({
+        vote: Map({
+          pair: List.of('movie3', 'movie4')
+        }),
+        entries: List.of('movie5', 'movie1', 'movie2')
+      }));
+    });
+
+
   });
 
   describe('vote', () => {
