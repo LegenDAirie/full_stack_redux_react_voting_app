@@ -49,4 +49,29 @@ describe('reducer', () => {
     }));
   });
 
+  it('has an initial state', () => {
+    const action = {type: 'SET_ENTRIES', entries: ['movie1']};
+    const nextState = reducer(undefined, action);
+    expect(nextState).to.equal(fromJS({
+      entries: ['movie1']
+    }));
+  });
+
+  it('can be used with reduce', () => {
+    const actions = [
+      {type: 'SET_ENTRIES', entries: ['movie1', 'movie2']},
+      {type: 'NEXT'},
+      {type: 'VOTE', entry: 'movie1'},
+      {type: 'VOTE', entry: 'movie2'},
+      {type: 'VOTE', entry: 'movie1'},
+      {type: 'NEXT'},
+    ];
+
+    const finalState = actions.reduce(reducer, Map());
+
+    expect(finalState).to.equal(fromJS({
+      winner: 'movie1'
+    }));
+  });
+
 });
