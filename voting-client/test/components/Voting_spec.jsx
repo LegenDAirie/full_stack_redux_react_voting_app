@@ -110,7 +110,7 @@ describe('Voting', () => {
 
     const newPair = pair.set(0, 'movie3');
     component = ReactDOM.render(
-      <Voting pair={pair} />,
+      <Voting pair={newPair} />,
       container
     );
 
