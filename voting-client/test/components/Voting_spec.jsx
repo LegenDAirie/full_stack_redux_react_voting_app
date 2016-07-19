@@ -73,7 +73,27 @@ describe('Voting', () => {
     const winner = ReactDom.findDOMNode(component.refs.winner);
     expect(winner).to.be.ok;
     expect(winner.textContent).to.contain('movie1');
+  });
 
+  it('renders as a pure component', () => {
+    const pair = ['movie1', 'movie2'];
+    const container = document.createElement('div');
+    let component = ReactDom.render(
+      <Voting pair={pair} />,
+      container
+    );
+
+    let firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
+    expect(firstButton.textContent).to.equal('movie1');
+
+    pair[0] = 'movie3';
+    component = ReactDom.render(
+      <Voting pair={pair} />,
+      container
+    );
+
+    firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
+    expect(firstButton.textContent).to.equal('movie1');
   });
 
 });
