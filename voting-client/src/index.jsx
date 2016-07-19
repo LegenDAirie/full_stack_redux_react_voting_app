@@ -5,5 +5,5 @@ import Voting from './components/Voting';
 const pair = ['movie1', 'movie2'];
 ReactDom.render(
   <Voting pair={pair} />,
-  document.getElementById('app');
+  document.getElementById('app')
 );
