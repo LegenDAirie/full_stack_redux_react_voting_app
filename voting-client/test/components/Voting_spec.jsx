@@ -1,11 +1,12 @@
 import Voting from "../../src/components/Voting";
 import React from 'React';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
 import {
   renderIntoDocument,
   scryRenderedDOMComponentsWithTag,
   Simulate
 } from 'react-addons-test-utils';
+import {List} from 'immutable';
 import {expect} from 'chai';
 
 
@@ -70,7 +71,7 @@ describe('Voting', () => {
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
     expect(buttons.length).to.equal(0);
 
-    const winner = ReactDom.findDOMNode(component.refs.winner);
+    const winner = ReactDOM.findDOMNode(component.refs.winner);
     expect(winner).to.be.ok;
     expect(winner.textContent).to.contain('movie1');
   });
@@ -78,7 +79,7 @@ describe('Voting', () => {
   it('renders as a pure component', () => {
     const pair = ['movie1', 'movie2'];
     const container = document.createElement('div');
-    let component = ReactDom.render(
+    let component = ReactDOM.render(
       <Voting pair={pair} />,
       container
     );
@@ -87,13 +88,34 @@ describe('Voting', () => {
     expect(firstButton.textContent).to.equal('movie1');
 
     pair[0] = 'movie3';
-    component = ReactDom.render(
+    component = ReactDOM.render(
       <Voting pair={pair} />,
       container
     );
 
     firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
     expect(firstButton.textContent).to.equal('movie1');
+  });
+
+  it('does update the DOM when props change', () => {
+    const pair = List.of('movie1', 'movie2');
+    const container = document.createElement('div');
+    let component = ReactDOM.render(
+      <Voting pair={pair} />,
+      container
+    );
+
+    let firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
+    expect(firstButton.textContent).to.equal('movie1');
+
+    const newPair = pair.set(0, 'movie3');
+    component = ReactDOM.render(
+      <Voting pair={pair} />,
+      container
+    );
+
+    firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
+    expect(firstButton.textContent).to.equal('movie3');
   });
 
 });
