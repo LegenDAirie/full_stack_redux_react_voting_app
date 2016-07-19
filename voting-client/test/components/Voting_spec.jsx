@@ -51,4 +51,15 @@ describe('Voting', () => {
     expect(buttons[1].hasAttribute('disabled')).to.equal(true);
   });
 
+  it('adds labels to the voted entry', () => {
+    const component = renderIntoDocument(
+      <Voting pair={['movie1', 'movie2']}
+        hasVoted="movie1" />
+    );
+
+    const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
+
+    expect(buttons[0].textContent).to.contain('Voted');
+  });
+
 });
