@@ -1,4 +1,6 @@
 import React from 'react';
+import Winner from './Winner';
+import Vote from './Vote';
 
 export default React.createClass({
   render: function() {
