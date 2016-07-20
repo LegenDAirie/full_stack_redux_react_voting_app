@@ -37,7 +37,6 @@ describe('Results', () => {
                tally={Map()}
                next={next}/>
     );
-
     Simulate.click(ReactDOM.findDOMNode(component.refs.next));
 
     expect(nextInvoked).to.equal(true);
@@ -45,11 +44,10 @@ describe('Results', () => {
 
   it('renders the winner when there is one', () => {
     const component = renderIntoDocument(
-      <Results winnier="movie1"
+      <Results winner="movie1"
                pair={['movie1', 'movie2']}
                tally={Map()} />
     );
-
     const winner = ReactDOM.findDOMNode(component.refs.winner);
     expect(winner).to.be.ok;
     expect(winner.textContent).to.contain('movie1');
