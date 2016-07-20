@@ -6,7 +6,7 @@ export default React.createClass({
   getPair: function() {
     return this.props.pair || [];
   },
-  getVotes: function() {
+  getVotes: function(entry) {
     if (this.props.tally && this.props.tally.has(entry)) {
       return this.props.tally.get(entry);
     }
