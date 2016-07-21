@@ -108,4 +108,31 @@ describe('reducer', () => {
     }));
   });
 
+  it('removes hasVoted on SET_STATE if pair changes', () => {
+    const initialState = fromJS({
+      vote: {
+        pair: ['movie1', 'movie2'],
+        tally: {movie1: 1}
+      },
+      hasVoted: 'movie1'
+    });
+
+    const action = {
+      type: 'SET_STATE',
+      state: {
+        vote: {
+          pair: ['movie3', 'movie4']
+        }
+      }
+    };
+
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      vote: {
+        pair: ['movie3', 'movie4']
+      }
+    }));
+  });
+
 });
