@@ -89,4 +89,23 @@ describe('reducer', () => {
     }));
   });
 
+  it('does not set hasvoted for VOTE on invalid entry', () => {
+    const state = fromJS({
+      vote: {
+        pair: ['movie1', 'movie2'],
+        tally: {movie1: 1}
+      }
+    });
+
+    const action = {type: 'VOTE', entry: 'movie3'};
+    const nextState = reducer(state, action);
+
+    expect(nextState).to.equal(fromJS({
+      vote: {
+        pair: ['movie1', 'movie2'],
+        tally: {movie1: 1}
+      }
+    }));
+  });
+
 });
