@@ -1,7 +1,7 @@
 import {List, Map, fromJS} from 'immutable';
 import {expect} from 'chai';
 
-import reducer from '../src/reducer';
+import reducer from '../src//reducer';
 
 describe('reducer', () => {
   it('handles SET_STATE', () => {
@@ -53,8 +53,8 @@ describe('reducer', () => {
       type: 'SET_STATE',
       state: {
         vote: {
-          pair: ['Trainspotting', '28 Days Later'],
-          tally: {Trainspotting: 1}
+          pair: ['movie1', 'movie2'],
+          tally: {movie1: 1}
         }
       }
     };
