@@ -2,6 +2,7 @@ import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
 import Winner from './winner';
+import * as actionCreators from '../remote_action_middleware';
 
 export const Results = React.createClass({
   mixins: [PureRenderMixin],
@@ -49,4 +50,7 @@ function mapStateToProps(state) {
   }
 };
 
-export const ResultContainer = connect(mapStateToProps)(Results);
+export const ResultContainer = connect(
+  mapStateToProps,
+  actionCreators
+)(Results);
