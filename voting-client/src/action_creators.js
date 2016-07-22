@@ -1,9 +1,9 @@
-export function setState(entry) {
+export function setState(state) {
   return {
     type: 'SET_STATE',
-    entry
+    state
   };
-};
+}
 
 export function vote(entry) {
   return {
@@ -11,11 +11,11 @@ export function vote(entry) {
     type: 'VOTE',
     entry
   };
-};
+}
 
 export function next() {
   return {
     meta: {remote: true},
     type: 'NEXT'
   };
-};
+}
